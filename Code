@@ -1,0 +1,378 @@
+package genshinImpactDialogSkipper; // Needs to be changed to the name of your file! (Example: "package Main;") 
+
+import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Robot;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class Main implements ActionListener{
+
+	public static void main(String[] args) {
+		new Main(); 
+
+	}
+
+ 		JFrame frame;
+ 		JPanel Background; 
+ 		JButton StartBot; 
+ 		JButton StopBot; 
+ 		JLabel StartBotBestätigung; 
+ 		JLabel Title; 
+ 		JLabel Programmierer; 
+ 		JLabel Erklärung; 
+ 		JLabel SkipAndAnswer; 
+ 		JLabel Skip; 
+ 		JButton SKAA; 
+ 		JButton OS; 
+ 		
+	 	int x = 85; 
+	 	int y = 50; 
+	 	int wh = 5; 
+	 	
+	 	int saaX = 1275; 
+	 	int saaY = 500; 
+	 	
+	 	int ÜPX = 100; 
+	 	int ÜPY = 50; 
+	 	
+	 	String PN7 = "e"; 
+		String PN9 = "i"; 
+		String PN6 = "d"; 
+		String PN11 = "e"; 
+		String PN12 = "r"; 
+		String PN1 = "7"; 
+		String PN2 = "7"; 
+		String PN3 = "5"; 
+		String PN13 = "T"; 
+		String PN10 = "n"; 
+		String PN4 = "5"; 
+		String PN5 = "#"; 
+	 	
+	 	boolean Start = false; 
+	 	boolean FirstRound = true; 
+	 	
+	 	boolean SkipAndAnswerBool = false; 
+	 	boolean SkipBool = false; 
+	    
+	    Main() {
+
+	    	Title = new JLabel(); 
+			Title.setText("Genshin Impact Dialog Skipper");
+			Title.setBounds(75, -20, 1000, 100);
+			Title.setFont(new Font("",Font.PLAIN, 40));
+			Title.setForeground(Color.white);
+			Title.setVisible(true);
+			
+			Programmierer = new JLabel(); 
+			Programmierer.setText("Programmer (Discord): " + PN13 + PN12 + PN11 + PN10 + PN9 + PN7 + PN6 + PN5 + PN4 + PN3 + PN2 + PN1);
+			Programmierer.setBounds(180, 20, 1000, 100);
+			Programmierer.setFont(new Font("",Font.BOLD, 20));
+			Programmierer.setForeground(Color.white);
+			Programmierer.setVisible(true);
+			
+			Erklärung = new JLabel(); 
+			Erklärung.setText("Please select whether the bot should also answer or just skip the dialogs!");
+			Erklärung.setBounds(20, 95, 4500, 30);
+			Erklärung.setFont(new Font("",Font.BOLD, 18));
+			Erklärung.setForeground(Color.white);
+			Erklärung.setVisible(true);
+			
+			Skip = new JLabel(); 
+			Skip.setText("Only skip Dialogs:"); 
+			Skip.setBounds(270, 160, 500, 30);
+			Skip.setFont(new Font("",Font.BOLD, 18));
+			Skip.setForeground(Color.white);
+			Skip.setVisible(true);
+			
+			OS = new JButton();  
+			OS.setText("Skip Dialogs"); 
+			OS.setBounds(260, 200, 180, 50);
+			OS.addActionListener(this);
+			OS.setFocusable(false);
+			OS.setFont(new Font("",Font.BOLD, 20));
+			OS.setForeground(Color.BLACK);
+			OS.setBackground(Color.white);
+			
+			SkipAndAnswer = new JLabel(); 
+			SkipAndAnswer.setText("Skip and reply (Caution: Can lead to unwanted actions!):"); 
+			SkipAndAnswer.setBounds(105, 260, 500, 30);
+			SkipAndAnswer.setFont(new Font("",Font.BOLD, 18));
+			SkipAndAnswer.setForeground(Color.white);
+			SkipAndAnswer.setVisible(true);
+	    	
+	    	StartBot = new JButton();  
+			StartBot.setText("Start Dialog Skipper"); 
+			StartBot.setBounds(100, 380, 500, 60);
+			StartBot.addActionListener(this);
+			StartBot.setFocusable(false);
+			StartBot.setFont(new Font("",Font.BOLD, 20));
+			StartBot.setForeground(Color.BLACK);
+			StartBot.setBackground(Color.white);
+			StartBot.setVisible(true); 
+			
+			SKAA = new JButton();  
+			SKAA.setText("-Currently inoperable-"); 
+			SKAA.setBounds(250, 300, 200, 50);
+			SKAA.addActionListener(this);
+			SKAA.setFocusable(false);
+			SKAA.setFont(new Font("",Font.BOLD, 15));
+			SKAA.setForeground(Color.BLACK);
+			SKAA.setBackground(Color.white);
+			SKAA.setEnabled(false);
+			
+			StopBot = new JButton();  
+			StopBot.setText("Stop Dialog Skipper"); 
+			StopBot.setBounds(100, 380, 500, 60);
+			StopBot.addActionListener(this);
+			StopBot.setFocusable(false);
+			StopBot.setFont(new Font("",Font.BOLD, 20));
+			StopBot.setForeground(Color.BLACK);
+			StopBot.setBackground(Color.white);
+			StopBot.setVisible(false); 
+	    	
+			StartBotBestätigung = new JLabel(); 
+			StartBotBestätigung.setText("");  
+			StartBotBestätigung.setBounds(190, 95, 1000, 100);
+			StartBotBestätigung.setFont(new Font("",Font.PLAIN, 20));
+			StartBotBestätigung.setForeground(Color.green);
+			StartBotBestätigung.setVisible(true);
+			
+			Background = new JPanel(); 
+			Background.setBackground(Color.DARK_GRAY);
+			Background.setBounds(0, 0, 2000, 2000);
+	    	
+	    	frame = new JFrame(); 
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setSize(700, 500);
+			frame.setLayout(null);
+			frame.setTitle("Genshin Impact Dialog Skipper");
+			frame.setLocationRelativeTo(null);
+			frame.setResizable(false);
+			
+			frame.add(OS); 
+			frame.add(SKAA); 
+			frame.add(Skip); 
+			frame.add(SkipAndAnswer); 
+			frame.add(Erklärung); 
+			frame.add(Programmierer); 
+			frame.add(Title); 
+			frame.add(StartBotBestätigung); 
+			frame.add(StopBot); 
+			frame.add(StartBot); 
+			frame.add(Background); 
+			
+			frame.setVisible(true);
+	    	
+	        try {
+	            Robot r = new Robot();
+	            
+	            for(int i = 0; i < wh; i ++) {
+	            	
+	            if (Start == true) {
+	            	
+	            	if (FirstRound == true) {
+	            		
+	            		StartBotBestätigung.setBounds(190, 95, 1000, 100);
+						StartBotBestätigung.setText("Dialog Skipper starts in 5 Seconds !");
+						StartBotBestätigung.setForeground(Color.red);
+						r.delay(1000);
+						StartBotBestätigung.setText("Dialog Skipper starts in 4 Seconds !");
+						StartBotBestätigung.setForeground(Color.green);
+						r.delay(1000);
+						StartBotBestätigung.setText("Dialog Skipper starts in 3 Seconds !");
+						StartBotBestätigung.setForeground(Color.red);
+						r.delay(1000);
+						StartBotBestätigung.setText("Dialog Skipper starts in 2 Seconds !");
+						StartBotBestätigung.setForeground(Color.green);
+						r.delay(1000);
+						StartBotBestätigung.setText("Dialog Skipper starts in 1 Second !");
+						StartBotBestätigung.setForeground(Color.red);
+						r.delay(1000);
+						StartBotBestätigung.setBounds(160, StartBotBestätigung.getY(), StartBotBestätigung.getWidth(), StartBotBestätigung.getHeight()); 
+						StartBotBestätigung.setText("Dialog Skipper has been started succesfully!");
+						StartBotBestätigung.setForeground(Color.green);
+						StopBot.setEnabled(true);
+					System.out.println("Starting Bot");
+					
+					
+					FirstRound = false; 
+					
+					} else {
+						System.out.print("");
+					} 
+
+	            if (SkipBool == true) {
+
+		            Color c = r.getPixelColor(x, y);
+		            
+	            if (c.getRed() == 236) {
+	                    if (c.getGreen() == 229) {
+	                                if (c.getBlue() == 216) { 
+	                                	r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+										r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+	                             }
+	                    	}
+	            		}
+	            
+	            } else {
+	            	System.out.print("");
+	            }
+	            
+	            
+	            
+	            
+	            
+	            if (SkipAndAnswerBool == true) {
+	            	
+	            	Color c = r.getPixelColor(x, y);
+	            	
+	            		if (c.getRed() == 236) {
+		                    if (c.getGreen() == 229) {
+		                                if (c.getBlue() == 216) { 
+		                                	r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+											r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+		                             }
+		                    	}
+		            		}
+	            	
+	            		for (int i1 = 0; i1 < 80; i1++) {
+
+		            	Color c1 = r.getPixelColor(saaX, saaY);
+	            		
+		            	Color c2 = r.getPixelColor(ÜPX, ÜPY);
+		            	
+		            	if (c2.getRed() >= 30) {
+		    				if (c2.getRed() <= 200) {
+		    					if (c2.getGreen() >= 50) {
+		    						if (c2.getGreen() <= 150) {
+		    							if (c2.getBlue() >= 80) {
+		    								if (c1.getBlue() <= 120) { 
+		            	
+		            	if (c1.getRed() >= 20) {
+		    				if (c1.getRed() <= 70) {
+		    					if (c1.getGreen() >= 40) {
+		    						if (c1.getGreen() <= 90) {
+		    							if (c1.getBlue() >= 40) {
+		    								if (c1.getBlue() <= 90) { 
+	                                	
+	                                	r.mouseMove(saaX, saaY);
+	                                	r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+										r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+	                                	i1 = i1 + 500;  
+	            	            		saaY = 500; 
+	                             }
+	                    	}
+	            		}
+		    					}
+		    				}
+		            	}
+		            	
+		    								}
+		    							}
+		    						}
+		    					}
+		    				}
+		            	}
+		            	
+		            	
+	            	
+	            	if (saaY == 900) {
+	            		saaY = 500; 
+	            	} else {
+	            		saaY = saaY + 5; 
+	            	}
+	            	
+	            	}
+	            	
+	            } else {
+	            	System.out.print("");
+	            }
+	            
+	            
+	            
+	            
+	            
+	            r.delay(100);
+	            
+	            } else {
+	            	System.out.print(""); 
+	            }
+
+	                wh ++; 
+	            }
+	            
+	          } catch (AWTException e) {
+	            e.printStackTrace();
+	        }
+
+
+	    }
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			if (e.getSource() == OS) {
+				
+				SkipAndAnswerBool = false; 
+				SkipBool = true; 
+				SKAA.setBackground(Color.white);
+				OS.setBackground(Color.green);
+				
+			}
+			
+			if (e.getSource() == SKAA) {
+				
+				SkipAndAnswerBool = true; 
+				SkipBool = false; 
+				SKAA.setBackground(Color.green);
+				OS.setBackground(Color.white);
+				
+			}
+			
+			if(e.getSource() == StartBot) {
+				Start = true; 
+				StartBot.setVisible(false);
+				StopBot.setVisible(true);
+				StartBotBestätigung.setLocation(StartBotBestätigung.getX() + 5, StartBotBestätigung.getY());
+				SKAA.setEnabled(false);
+				OS.setEnabled(false);
+				StartBotBestätigung.setText("");
+				StopBot.setEnabled(false); 
+				
+				if (SkipBool == false) {
+					if (SkipAndAnswerBool == false) {
+						SkipAndAnswerBool = false; 
+						SkipBool = true; 
+						SKAA.setBackground(Color.white);
+						OS.setBackground(Color.green);
+					}
+				}
+				
+			}
+			
+			if(e.getSource() == StopBot) {
+				Start = false; 
+				StartBot.setVisible(true);
+				StopBot.setVisible(false);
+				StartBotBestätigung.setLocation(StartBotBestätigung.getX() + 5, StartBotBestätigung.getY());
+				StartBotBestätigung.setText("Wishing Bot has been stopped succesfully!");
+				SKAA.setEnabled(false);
+				OS.setEnabled(true);
+				FirstRound = true; 
+				SkipBool = false; 
+				SkipAndAnswerBool = false; 
+				SKAA.setBackground(Color.white);
+				OS.setBackground(Color.white);
+			}
+			
+		}
+	}
