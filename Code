@@ -38,11 +38,15 @@ public class Main implements ActionListener{
 	 	int y = 50; 
 	 	int wh = 5; 
 	 	
+	 	int AnswerY = 500; 
+	 	
 	 	int saaX = 1275; 
 	 	int saaY = 500; 
 	 	
 	 	int ÜPX = 100; 
 	 	int ÜPY = 50; 
+	 	
+	 	int waitingTime = 750; 
 	 	
 	 	String PN7 = "e"; 
 		String PN9 = "i"; 
@@ -62,6 +66,8 @@ public class Main implements ActionListener{
 	 	
 	 	boolean SkipAndAnswerBool = false; 
 	 	boolean SkipBool = false; 
+	 	
+	 	boolean Answer = false; 
 	    
 	    Main() {
 
@@ -120,14 +126,13 @@ public class Main implements ActionListener{
 			StartBot.setVisible(true); 
 			
 			SKAA = new JButton();  
-			SKAA.setText("-Currently inoperable-"); 
+			SKAA.setText("Skip and Answer"); 
 			SKAA.setBounds(250, 300, 200, 50);
 			SKAA.addActionListener(this);
 			SKAA.setFocusable(false);
-			SKAA.setFont(new Font("",Font.BOLD, 15));
+			SKAA.setFont(new Font("",Font.BOLD, 20));
 			SKAA.setForeground(Color.BLACK);
 			SKAA.setBackground(Color.white);
-			SKAA.setEnabled(false);
 			
 			StopBot = new JButton();  
 			StopBot.setText("Stop Dialog Skipper"); 
@@ -208,10 +213,8 @@ public class Main implements ActionListener{
 					
 					} else {
 						System.out.print("");
-					} 
-
-	            if (SkipBool == true) {
-
+					}
+	            	
 		            Color c = r.getPixelColor(x, y);
 		            
 	            if (c.getRed() == 236) {
@@ -219,87 +222,60 @@ public class Main implements ActionListener{
 	                                if (c.getBlue() == 216) { 
 	                                	r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 										r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-	                             }
-	                    	}
-	            		}
-	            
-	            } else {
-	            	System.out.print("");
-	            }
-	            
-	            
-	            
-	            
-	            
-	            if (SkipAndAnswerBool == true) {
-	            	
-	            	Color c = r.getPixelColor(x, y);
-	            	
-	            		if (c.getRed() == 236) {
-		                    if (c.getGreen() == 229) {
-		                                if (c.getBlue() == 216) { 
-		                                	r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-											r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-		                             }
-		                    	}
+										if(SkipAndAnswerBool == true) {
+										Answer = true; 
+										}
+										
+	                             } else {
+	                            	 
+	                            	 if (Answer == true) {
+	 		            				r.delay(waitingTime);
+	                            		 for (int i1 = 0; i1 < 40; i1 ++) {
+	                            				r.mouseMove(1400, AnswerY);
+	                            				r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+	                            				r.delay(1);
+	                            				r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+	                            				r.delay(5);
+	                            				
+	                            				AnswerY = AnswerY + 10; 
+	                            				}
+	     	            			}
+	 	                    		AnswerY = 500; 
+	 		            			Answer = false;
+	     	            		}
+	                                
+	                    	} else {
+	                    		if (Answer == true) {
+		            				r.delay(waitingTime);
+	                    			 for (int i1 = 0; i1 < 40; i1 ++) {
+                         				r.mouseMove(1400, AnswerY);
+                         				r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+                         				r.delay(1);
+                         				r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+                         				r.delay(5);
+                         				
+                         				AnswerY = AnswerY + 10; 
+                         				}
+		            			}
+	                    		AnswerY = 500; 
+	            			Answer = false;
 		            		}
-	            	
-	            		for (int i1 = 0; i1 < 80; i1++) {
-
-		            	Color c1 = r.getPixelColor(saaX, saaY);
-	            		
-		            	Color c2 = r.getPixelColor(ÜPX, ÜPY);
-		            	
-		            	if (c2.getRed() >= 30) {
-		    				if (c2.getRed() <= 200) {
-		    					if (c2.getGreen() >= 50) {
-		    						if (c2.getGreen() <= 150) {
-		    							if (c2.getBlue() >= 80) {
-		    								if (c1.getBlue() <= 120) { 
-		            	
-		            	if (c1.getRed() >= 20) {
-		    				if (c1.getRed() <= 70) {
-		    					if (c1.getGreen() >= 40) {
-		    						if (c1.getGreen() <= 90) {
-		    							if (c1.getBlue() >= 40) {
-		    								if (c1.getBlue() <= 90) { 
-	                                	
-	                                	r.mouseMove(saaX, saaY);
-	                                	r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-										r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-	                                	i1 = i1 + 500;  
-	            	            		saaY = 500; 
-	                             }
-	                    	}
+	            		} else {
+	            			if (Answer == true) {
+	            				r.delay(waitingTime);
+	                    			 for (int i1 = 0; i1 < 40; i1 ++) {
+                         				r.mouseMove(1400, AnswerY);
+                         				r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+                         				r.delay(1);
+                         				r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+                         				r.delay(5);
+                         				
+                         				AnswerY = AnswerY + 10; 
+                         				}
+	            			}
+	            			AnswerY = 500; 
+           				 Answer = false;
 	            		}
-		    					}
-		    				}
-		            	}
-		            	
-		    								}
-		    							}
-		    						}
-		    					}
-		    				}
-		            	}
-		            	
-		            	
-	            	
-	            	if (saaY == 900) {
-	            		saaY = 500; 
-	            	} else {
-	            		saaY = saaY + 5; 
-	            	}
-	            	
-	            	}
-	            	
-	            } else {
-	            	System.out.print("");
-	            }
-	            
-	            
-	            
-	            
 	            
 	            r.delay(100);
 	            
@@ -332,7 +308,7 @@ public class Main implements ActionListener{
 			if (e.getSource() == SKAA) {
 				
 				SkipAndAnswerBool = true; 
-				SkipBool = false; 
+				SkipBool = true; 
 				SKAA.setBackground(Color.green);
 				OS.setBackground(Color.white);
 				
@@ -364,8 +340,8 @@ public class Main implements ActionListener{
 				StartBot.setVisible(true);
 				StopBot.setVisible(false);
 				StartBotBestätigung.setLocation(StartBotBestätigung.getX() + 5, StartBotBestätigung.getY());
-				StartBotBestätigung.setText("Wishing Bot has been stopped succesfully!");
-				SKAA.setEnabled(false);
+				StartBotBestätigung.setText("Dialog skip has been stopped succesfully!");
+				SKAA.setEnabled(true);
 				OS.setEnabled(true);
 				FirstRound = true; 
 				SkipBool = false; 
@@ -375,4 +351,6 @@ public class Main implements ActionListener{
 			}
 			
 		}
+		
 	}
+
