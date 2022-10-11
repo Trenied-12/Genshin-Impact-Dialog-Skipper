@@ -1,4 +1,4 @@
-package genshinImpactDialogSkipper; // Needs to be changed to the name of your file! (Example: "package Main;") 
+package genshinImpactDialogSkipper;
 
 import java.awt.AWTException;
 import java.awt.Color;
@@ -46,6 +46,9 @@ public class Main implements ActionListener{
 	 	int ÜPX = 100; 
 	 	int ÜPY = 50; 
 	 	
+	 	int x1 = 200; 
+		int y1 = 1010; 
+	 	
 	 	int waitingTime = 750; 
 	 	
 	 	String PN7 = "e"; 
@@ -68,6 +71,7 @@ public class Main implements ActionListener{
 	 	boolean SkipBool = false; 
 	 	
 	 	boolean Answer = false; 
+	 	boolean Allowed; 
 	    
 	    Main() {
 
@@ -215,13 +219,25 @@ public class Main implements ActionListener{
 						System.out.print("");
 					}
 	            	
+	            	Color c1 = r.getPixelColor(x1, y1); 
+	            	
+	            	   if (c1.getRed() == 236) {
+		                    if (c1.getGreen() == 229) {
+		                                if (c1.getBlue() == 216) { 
+		                                	 Allowed = false;
+		                                } else Allowed = true;
+		                    }  else Allowed = true;
+	            	   }  else Allowed = true;
+	            	   
 		            Color c = r.getPixelColor(x, y);
 		            
 	            if (c.getRed() == 236) {
 	                    if (c.getGreen() == 229) {
 	                                if (c.getBlue() == 216) { 
+	             	            	   if (Allowed == true) {
 	                                	r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 										r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+	             	            	   }
 										if(SkipAndAnswerBool == true) {
 										Answer = true; 
 										}
