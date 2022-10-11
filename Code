@@ -1,4 +1,4 @@
-package genshinImpactDialogSkipper;
+package genshinImpactDialogSkipper; // Needs to be changed to the name of your file! (Example: "package Main;") 
 
 import java.awt.AWTException;
 import java.awt.Color;
