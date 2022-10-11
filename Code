@@ -231,13 +231,13 @@ public class Main implements ActionListener{
 	            	   
 		            Color c = r.getPixelColor(x, y);
 		            
+		            if (Allowed == true) {
+		            
 	            if (c.getRed() == 236) {
 	                    if (c.getGreen() == 229) {
 	                                if (c.getBlue() == 216) { 
-	             	            	   if (Allowed == true) {
 	                                	r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 										r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-	             	            	   }
 										if(SkipAndAnswerBool == true) {
 										Answer = true; 
 										}
@@ -294,6 +294,8 @@ public class Main implements ActionListener{
 	            		}
 	            
 	            r.delay(100);
+	            
+		            }
 	            
 	            } else {
 	            	System.out.print(""); 
@@ -369,4 +371,5 @@ public class Main implements ActionListener{
 		}
 		
 	}
+
 
